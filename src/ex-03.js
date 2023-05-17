@@ -29,6 +29,13 @@ import {
     renderer.setSize(window.innerWidth, window.innerHeight) // 윈도우 기준으로 가,세로 꽉차게
     document.body.appendChild(renderer.domElement)
 
+            //텍스쳐 추가
+            const TextureLoader = new THREE.TextureLoader()
+            const textureBaseColor = TextureLoader.load('../static/img/Gravel_001_BaseColor.jpg')
+            const textureNormalMap = TextureLoader.load('../static/img/Gravel_001_Height.png')
+            const textureHeightMap = TextureLoader.load('../static/img/Gravel_001_Normal.jpg')
+            const textureRoughnessMap = TextureLoader.load('../static/img/Gravel_001_Roughness.jpg')
+    
     //렌더러장면을 어떤 태그에 노출을 시켜줄지.
 
     const pointLight = new THREE.PointLight(0xffffff , 1)
@@ -70,15 +77,32 @@ import {
     obj04.position.x= 2;
     scene.add(obj04)
 
+    const geometry05 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
     const material05 = new THREE.MeshStandardMaterial({
         color: 0x9CA653,
         metalness:0.6,
         roughness :0.4,
     })
-    const obj05 = new THREE.Mesh(geometry04, material05);
+    const obj05 = new THREE.Mesh(geometry05, material05);
     obj05.position.x= 2;
-    obj05.position.y= 1;
+    obj05.position.y= 2;
     scene.add(obj05)
+
+    const geometry06 = new THREE.SphereGeometry(0.4,50,56); // x y z 값을 설정
+    const material06 = new THREE.MeshBasicMaterial({   // 질감 설정 
+        map : textureBaseColor,
+        normalMap : textureNormalMap
+        
+    })
+    const obj6 = new THREE.Mesh(geometry06 ,material06)
+    obj6.position.x=1
+    obj6.position.y=-1
+    scene.add(obj6)
+
+
+
+    //*도형 추가
+
 
     //1.방법
     document.body.appendChild(renderer.domElement);
@@ -94,6 +118,7 @@ import {
         obj3.rotation.y = time;
         obj04.rotation.y = time;
         obj05.rotation.x = time;
+        obj6.rotation.x = time;
 
         renderer.render(scene, camera);
        
