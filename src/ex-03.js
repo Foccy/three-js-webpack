@@ -11,15 +11,23 @@ import {
     //*장면
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xF2F2F2)
-
+    //------------------------------------------------------
+    //카메라 옵션 추가
+    const fov = 75;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 1000;
     //*카메라
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    camera.position.z=3
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+    camera.position.set(0,2,1);
+    // camera.position.z=0;
+    // camera.position.y=0;
+    // camera.position.z=1;
+    camera.lookAt(new THREE.Vector3(0,0,0))
 
     //2. 캔버스 태그를 html에 직접 추가해서 하는 방법
     // //*캔버스
     // const canvas = document.querySelector('#ex-03');
-
 
     //*렌더러
     const renderer = new THREE.WebGLRenderer({
@@ -37,6 +45,16 @@ import {
             const textureRoughnessMap = TextureLoader.load('../static/img/Gravel_001_Roughness.jpg')
     
     //렌더러장면을 어떤 태그에 노출을 시켜줄지.
+    
+     //바닥 추가
+     const planeGeometry = new THREE.PlaneGeometry(30,30,1,1);
+     const planeMaterial = new THREE.MeshStandardMaterial({
+       color:0xeeeeee
+     });
+     const plane = new THREE.Mesh(planeGeometry,planeMaterial);
+     plane.rotation.x = -0.5* Math.PI;
+     plane.position.y = -0.5;
+     scene.add(plane);
 
     const pointLight = new THREE.PointLight(0xffffff , 1)
     pointLight.position.set(0,2,12)
@@ -96,7 +114,7 @@ import {
     })
     const obj6 = new THREE.Mesh(geometry06 ,material06)
     obj6.position.x=1
-    obj6.position.y=-1
+    obj6.position.y=1
     scene.add(obj6)
 
 
