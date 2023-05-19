@@ -1,6 +1,7 @@
 
 import { doc } from 'prettier';
 import * as THREE from 'three'
+import { HemisphereLight } from 'three';
 
 import { 
     WEBGL
@@ -19,7 +20,7 @@ import {
     const far = 1000;
     //*카메라
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
-    camera.position.set(0,2,1);
+    camera.position.set(0,2,4);
     // camera.position.z=0;
     // camera.position.y=0;
     // camera.position.z=1;
@@ -46,7 +47,7 @@ import {
     
     //렌더러장면을 어떤 태그에 노출을 시켜줄지.
     
-     //바닥 추가
+     // *바닥 추가
      const planeGeometry = new THREE.PlaneGeometry(30,30,1,1);
      const planeMaterial = new THREE.MeshStandardMaterial({
        color:0xeeeeee
@@ -56,9 +57,47 @@ import {
      plane.position.y = -0.5;
      scene.add(plane);
 
-    const pointLight = new THREE.PointLight(0xffffff , 1)
-    pointLight.position.set(0,2,12)
-    scene.add(pointLight)
+
+    // *빛
+    // //AmbientLight
+    // const ambientLight = new THREE.AmbientLight
+    // (0xFFA500, 0.1);
+    // scene.add(ambientLight)
+
+    // //DirectionalLight
+    // const directionalLight = new THREE.DirectionalLight
+    // (0xFFA500, 0.1);
+    // directionalLight.position.set(1,1,1)
+    // const dlHelper = new THREE.DirectionalLightHelper(directionalLight,0.5, 0x0000ff)
+    // scene.add(dlHelper)
+    // scene.add(directionalLight)
+
+    // //HemisphereLight
+    // const hemisphereLight = new THREE.HemisphereLight(0x0000ff, 0xff0000, 1)
+    // scene.add(hemisphereLight)
+
+    //PointLight
+     const pointLight = new THREE.PointLight(0xffffff, 1);
+     scene.add(pointLight);
+     pointLight.position.set(-2,0.5,0.5);
+     const plHelper = new THREE.PointLightHelper(pointLight, 0.1);
+     scene.add(plHelper)
+
+    //  const pointLight1 = new THREE.PointLight(0xffffff, 1);
+    //  scene.add(pointLight1);
+    //  pointLight.position.set(3,0.5,0.5);
+    //  const plHelper1 = new THREE.PointLightHelper(pointLight, 0.1);
+    //  scene.add(plHelper1)
+
+    // //RectAreaLight
+    // const rectLight = new THREE.RectAreaLight(0xffffff,2,1,5)
+    // scene.add(rectLight)
+    // rectLight.position.set(0.5, 0.5, 1)
+    // rectLight.lookAt(0,0,0);
+
+    // //SpotLight
+    // const spotLight = new THREE.SpotLight(0xffffff, 0.5);
+    // scene.add(spotLight);
 
     //*매쉬
     const geometry01 = new THREE.BoxGeometry(0.5, 0.5, 0.5); // x y z 값을 설정
