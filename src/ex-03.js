@@ -137,7 +137,7 @@ import {
     const geometry05 = new THREE.TorusGeometry(0.3, 0.15, 16, 40)
     const material05 = new THREE.MeshStandardMaterial({
         color: 0x9CA653,
-        metalness:0.6,
+        metalness:0.5,
         roughness :0.4,
     })
     const obj05 = new THREE.Mesh(geometry05, material05);
